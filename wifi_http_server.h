@@ -7,6 +7,7 @@
 #include <SPI.h>
 #include <WiFi.h>
 #include "htmlwriter.h"
+#include "debug.h"
 
 #include "credentials.h"  // NOTE: you need to create this file yourself and define WIFI_SSID and WIFI_PASSWORD
 
@@ -20,7 +21,7 @@ namespace Wifi {
   bool HandleConnection(WiFiClient* client) {
     bool return_status = false;
     bool found_upload = true;
-    Serial.println("new client");           // print a message out the serial port
+    P("new client");                        // print a message out the serial port
     String currentLine = "";                // make a String to hold incoming data from the client
     while (client->connected()) {            // loop while the client's connected
       if (client->available()) {             // if there's bytes to read from the client,
@@ -38,7 +39,7 @@ namespace Wifi {
           else {      // if you got a newline, then clear currentLine:
             // Was this an Upload request?
             if (found_upload) {
-              Serial.println("Found an upload request!!");
+              P("Found an upload request!!");
             }
             found_upload = false;
             currentLine = "";
@@ -67,30 +68,27 @@ namespace Wifi {
     }
     // close the connection:
     client->stop();
-    Serial.println("client disonnected");
+    P("client disonnected");
     return return_status;
   }
   bool WifiCallback() {
     if (status != WL_CONNECTED) {
-      Serial.print(F("Attempting to connect to Network named: "));
-      Serial.println(ssid);                   // print the network name (SSID);
-
+      P2("Attempting to connect to Network named: ", ssid);
+ 
       // Connect to WPA/WPA2 network. Change this line if using open or WEP network:    
       status = WiFi.begin(ssid, pass);
       return false;
     }
     if (status != last_status) {
       last_status = status;
-      Serial.println("Connected to Wifi");
-      Serial.print("SSID: ");
-      Serial.println(WiFi.SSID());
+      P("Connected to Wifi");
+      P2("SSID: ", WiFi.SSID());
 
       // print your WiFi shield's IP address:
       IPAddress ip = WiFi.localIP();
-      Serial.print("IP Address: ");
-      Serial.println(ip);
+      P2("IP Address: ", ip);
       
-      Serial.println("Starting server");
+      P("Starting server");
       server.begin();
     }
     WiFiClient client = server.available();

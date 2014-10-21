@@ -1,6 +1,8 @@
 #ifndef _MULTITASKING_H_
 #define _MULTITASKING_H_
 
+#include "debug.h"
+
 // TODO(chsnow): make this a separate compilation unit and not a giant #include hack.
 
 // An ugly implementation of cooperative multitasking. The main loop yields by sleeping using 
@@ -27,8 +29,7 @@ namespace PeriodicEvent {
     next_[pos] = millis() + msec;
     if (msec < min_interval_) {
       min_interval_ = msec;
-      Serial.print("Min interval: ");
-      Serial.println(min_interval_);
+      P2("Min interval: ", min_interval_);
     }
   }
   
@@ -38,8 +39,7 @@ namespace PeriodicEvent {
     unsigned long last_check_ = millis();
     for (int i = 0; i < NUM_PERIODIC_EVENTS; ++i) {
       if (next_[i] > 0 && next_[i] <= last_check_ && callback_[0]) {
-        Serial.print("Calling interrupt: ");
-        Serial.println(i);
+        P2("Calling interrupt: ", i);
         if ((*callback_[i])()) {
           state_change = true;
         }
@@ -55,8 +55,7 @@ namespace PeriodicEvent {
     while (sleep_remaining > 0) {
       int sleep_time = (sleep_remaining > min_interval_) ? min_interval_ : sleep_remaining;
       sleep_remaining -= sleep_time;
-      Serial.print("delaying: ");
-      Serial.println(sleep_time);
+      P2("delaying: ", sleep_time);
       delay(sleep_time);
       if (millis() > last_check_ + min_interval_) { 
         if (Check()) { 
