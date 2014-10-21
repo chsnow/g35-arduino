@@ -1,4 +1,8 @@
-
+// This code is designed to self-calibrate the delays used in the 
+// G-35's proprietary serial bus protocol. I'm not actually using 
+// it at the moment, though...
+//
+// TODO(chsnow): clean this up and start using it.
 /*
 #define ITERATIONS (100)
 unsigned long RunEmptyCalibrationLoop() {

@@ -1,6 +1,8 @@
 #ifndef _HTMLCONSTS_H_
 #define _HTMLCONSTS_H_
+// TODO(chsnow): make this a separate compilation unit and not a giant #include hack.
 
+#include <SPI.h>
 #include <WiFi.h>
 #include <avr/pgmspace.h>
 
@@ -34,8 +36,6 @@ namespace htmlwriter {
     ss_1,
     ss_2,
     ss_3 };
-   
- 
   
   void Output(WiFiClient* client, char* main_string) {
     for (int i = 0; i < n_prefixes; i++) {
@@ -47,7 +47,6 @@ namespace htmlwriter {
       strcpy_P(buffer, (char*)pgm_read_word(&(suffix_string_table[i])));
       client->println( buffer );
     }
-
   }
 }  // namespace htmlwriter
 
