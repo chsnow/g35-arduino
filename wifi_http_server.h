@@ -32,20 +32,6 @@ namespace Wifi {
           // that's the end of the client HTTP request, so send a response:
           if (currentLine.length() == 0) { 
             htmlwriter::Output(client, Global::program_str);
-            /* 
-            // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
-            // and a content-type so the client knows what's coming, then a blank line:    
-            client->println("HTTP/1.1 200 OK");
-            client->println("Content-type:text/html");
-            client->println();
-
-            // the content of the HTTP response follows the header:
-            client->print("Click <a href=\"/H\">here</a> turn the LED on pin 9 on<br>");
-            client->print("Click <a href=\"/L\">here</a> turn the LED on pin 9 off<br>");
-
-            // The HTTP response ends with another blank line:
-            client->println();
-            */
             // break out of the while loop:
             break;         
           } 

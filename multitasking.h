@@ -3,7 +3,8 @@
 
 // TODO(chsnow): make this a separate compilation unit and not a giant #include hack.
 
-// An ugly implementation of cooperative multitasking. The main mechanism for yielding is to sleep on Delay.
+// An ugly implementation of cooperative multitasking. The main loop yields by sleeping using 
+// PeriodicEvent::Delay, giving us time to check if we should run any periodic callbacks.
 //
 // The bool return value of Delay is a signal to the MainLoop that some global state has changed, and 
 // that it should re-parse its control code and restart its lighting program. For example, someone might
