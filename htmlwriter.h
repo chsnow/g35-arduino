@@ -1,5 +1,5 @@
-#ifndef _HTMLCONSTS_H_
-#define _HTMLCONSTS_H_
+#ifndef _HTMLWRITER_H_
+#define _HTMLWRITER_H_
 // TODO(chsnow): make this a separate compilation unit and not a giant #include hack.
 
 #include <SPI.h>
@@ -8,7 +8,7 @@
 
 #define HTMLWRITER_BUFFER_SZ (110)
 namespace htmlwriter {
-  //                                ====================================================================================================
+  //                          ====================================================================================================
   prog_char ps_1[] PROGMEM = "HTTP/1.0 200 OK";
   prog_char ps_2[] PROGMEM = "Content-type:text/html";
   prog_char ps_3[] PROGMEM = "";  // Required empty line.
@@ -50,4 +50,4 @@ namespace htmlwriter {
   }
 }  // namespace htmlwriter
 
-#endif  // _HTMLCONSTS_H_
+#endif  // _HTMLWRITER_H_

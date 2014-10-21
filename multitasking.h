@@ -1,5 +1,5 @@
 #ifndef _MULTITASKING_H_
-#define _MULTITASKING_H
+#define _MULTITASKING_H_
 
 // TODO(chsnow): make this a separate compilation unit and not a giant #include hack.
 
