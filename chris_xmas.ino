@@ -130,11 +130,7 @@ void SetColor(int logical_addr, int intensity, int R, int G, int B) {
   while (g_string_info.last_addr[idx] < logical_addr) {
    idx++;
   }
-  int physical_addr = logical_addr - g_string_info.first_addr[idx];
-  if (!g_string_info.info[idx].first_bulb_is_zero) {
-    // Bulbs were initialized in reverse order.
-    physical_addr = g_string_info.info[idx].n_bulbs - 1 - physical_addr;
-  }
+  const int physical_addr = logical_addr - g_string_info.first_addr[idx];
   SetColorPhysical(g_string_info.info[idx].pin, physical_addr, intensity, R, G, B);
 }
 
