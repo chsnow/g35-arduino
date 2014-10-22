@@ -288,10 +288,10 @@ void setup() {
   Serial.begin(9600);
   delay(2000);
 
-  AddAndInitString(/* pin = */ 31, /* n_bulbs = */ 25, /* first_bulb_is_zero = */ true);
+  AddAndInitString(/* pin = */ 53, /* n_bulbs = */ 25, /* first_bulb_is_zero = */ true);
   // In my setup, the far end of the 50-bulb string is physically closest to the far end 
   // of the 25-bulb string, so use reverse address ordering for the 50-bulb string.
-  AddAndInitString(/* pin = */ 41, /* n_bulbs = */ 50, /* first_bulb_is_zero = */ false);
+  AddAndInitString(/* pin = */ 31, /* n_bulbs = */ 50, /* first_bulb_is_zero = */ false);
 
   SetAllColor(0xcc, 15, 0, 0);  // POST color.
   
