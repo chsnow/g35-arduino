@@ -294,7 +294,7 @@ void setup() {
   // Register the various multitasking functions.
   PeriodicEvent::SetHandler(0, 1000, BlinkLed);
   PeriodicEvent::SetHandler(1, 1000, SerialCommandLoop);
-  PeriodicEvent::SetHandler(2, 1000, Wifi::WifiCallback);
+  //PeriodicEvent::SetHandler(2, 1000, Wifi::WifiCallback);
 }
 
 void loop() {
