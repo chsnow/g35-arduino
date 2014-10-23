@@ -31,7 +31,7 @@ namespace Global {
     int n_msec;
   } WaitData;
   
-  static const byte kMaxShiftColors = 16;
+  static const byte kMaxShiftColors = 32;
   typedef struct ShiftData_t {
     int n_colors;
     byte colors[kMaxShiftColors];
@@ -82,7 +82,7 @@ namespace Global {
   // lime green 04,15,00
   // bluegreen 00, 10, 15
 
-  prog_char program_halloween[] PROGMEM = "C000;CF20;C4F0;C00F;S123;A204;W10000;S0;F123000;S0;A0,0;S1;A204;W1000;A0;S2;A204;W1000;A0;S3;A204;W1000;A0;S0;A204,0;F123000;S0;A0,0;S123;A204;W1000;A0;S231;A204;W1000;A0;S312;A204;W1000;A0;S123;A204;";
+  prog_char program_halloween[] PROGMEM = "C000;CF20;C4F0;C00F;S123;A204;W5000;F11112222333300000000000000000000,150;S123;A204;W10000;S0;F123000;S0;A0,0;S1;A204;W1000;A0;S2;A204;W1000;A0;S3;A204;W1000;A0;S0;A204,0;F123000;S0;A0,0;S123;A204;W1000;A0;S231;A204;W1000;A0;S312;A204;W1000;A0;S123;A204;";
   prog_char program_christmas[] PROGMEM = "C000;CF00;C0F0;A0;S1;A204;W1000;A0;S2;A204;W1000;";
   static const int kMaxProgramBuf = 1024;
   char program_str[kMaxProgramBuf] = "";
