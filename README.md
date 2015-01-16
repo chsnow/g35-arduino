@@ -7,5 +7,7 @@ THIS CODE IS __UGLY__ AND UNSUPPORTED :) I think the cooperative multitasking is
 
 My current setup is two strings of G-35 lights (a 25-bulb and a 50-bulb), driven from an Arduino Mega 2560 with a WiFi shield.
 
+The lights in action: http://youtu.be/jvRrTi9ftyA
+
 
 Good technical overview for hacking the G-35 lights: http://www.deepdarc.com/2010/11/27/hacking-christmas-lights/
