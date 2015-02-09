@@ -8,10 +8,11 @@ namespace Global {
   typedef enum SelectedProgram_e {
     PROGRAM_HALLOWEEN = 1,
     PROGRAM_CHRISTMAS,
+    PROGRAM_VALENTINES,
     PROGRAM_RAINBOW,
     PROGRAM_TESTING
   } SelectedProgram;
-  SelectedProgram selected_program = PROGRAM_CHRISTMAS;
+  SelectedProgram selected_program = PROGRAM_VALENTINES;
   
   typedef enum CommandType_e {
     CMD_SOLID_COLORS = 1,  // S
@@ -84,6 +85,7 @@ namespace Global {
 
   prog_char program_halloween[] PROGMEM = "C000;CF20;C4F0;C00F;S123;A204;W5000;F11112222333300000000000000000000,150;S123;A204;W10000;S0;F123000;S0;A0,0;S1;A204;W1000;A0;S2;A204;W1000;A0;S3;A204;W1000;A0;S0;A204,0;F123000;S0;A0,0;S123;A204;W1000;A0;S231;A204;W1000;A0;S312;A204;W1000;A0;S123;A204;";
   prog_char program_christmas[] PROGMEM = "C000;CF00;C0F0;CFFF;S123;A204;W5000;F33331111222233330000000000000000,150;S123;A204;W10000;S0;F123000;S0;A0,0;S1;A204;W1000;A0;S2;A204;W1000;A0;S3;A204;W1000;A0;S0;A204,0;F123000;S0;A0,0;S123;A204;W1000;A0;S231;A204;W1000;A0;S312;A204;W1000;A0;S123;A204;";
+  prog_char program_valentines[] PROGMEM = "C000;CF00;CF25;CFFB;S123;A204;W5000;F33331111222233330000000000000000,150;S123;A204;W10000;S0;F123000;S0;A0,0;S1;A204;W1000;A0;S2;A204;W1000;A0;S3;A204;W1000;A0;S0;A204,0;F123000;S0;A0,0;S123;A204;W1000;A0;S231;A204;W1000;A0;S312;A204;W1000;A0;S123;A204;";
   static const int kMaxProgramBuf = 1024;
   char program_str[kMaxProgramBuf] = "";
   
@@ -98,6 +100,11 @@ namespace Global {
       case PROGRAM_CHRISTMAS: {
         P("  christmas");
         strcpy_P(program_str, program_christmas);
+        break;
+      }
+      case PROGRAM_VALENTINES: {
+        P("  valentines");
+        strcpy_P(program_str, program_valentines);
         break;
       }
     }
