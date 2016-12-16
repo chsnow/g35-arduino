@@ -9,22 +9,22 @@
 #define HTMLWRITER_BUFFER_SZ (110)
 namespace htmlwriter {
   //                          ====================================================================================================
-  prog_char ps_1[] PROGMEM = "HTTP/1.0 200 OK";
-  prog_char ps_2[] PROGMEM = "Content-type:text/html";
-  prog_char ps_3[] PROGMEM = "";  // Required empty line.
-  prog_char ps_4[] PROGMEM = "<html><body>";  
-  prog_char ps_5[] PROGMEM = "<a href=\"/restart\">Restart</a><br>";
-  prog_char ps_6[] PROGMEM = "Programs: <a href=\"/halloween\">Halloween</a>, <a href=\"/christmas\">Christmas</a><br>";
-  prog_char ps_7[] PROGMEM = "<textarea rows=\"20\" cols=\"80\" name=\"code\" form=\"f\">";
+  const char ps_1[] PROGMEM = "HTTP/1.0 200 OK";
+  const char ps_2[] PROGMEM = "Content-type:text/html";
+  const char ps_3[] PROGMEM = "";  // Required empty line.
+  const char ps_4[] PROGMEM = "<html><body>";  
+  const char ps_5[] PROGMEM = "<a href=\"/restart\">Restart</a><br>";
+  const char ps_6[] PROGMEM = "Programs: <a href=\"/halloween\">Halloween</a>, <a href=\"/christmas\">Christmas</a><br>";
+  const char ps_7[] PROGMEM = "<textarea rows=\"20\" cols=\"80\" name=\"code\" form=\"f\">";
   const int n_prefixes = 7;
   
-  prog_char ss_1[] PROGMEM = "</textarea><form action=\"upload\" id=\"f\"><input type=\"submit\"></form>";
-  prog_char ss_2[] PROGMEM = "</body></html>";
-  prog_char ss_3[] PROGMEM = "";  // Required empty line.
+  const char ss_1[] PROGMEM = "</textarea><form action=\"upload\" id=\"f\"><input type=\"submit\"></form>";
+  const char ss_2[] PROGMEM = "</body></html>";
+  const char ss_3[] PROGMEM = "";  // Required empty line.
   const int n_suffixes = 3;
   char buffer[HTMLWRITER_BUFFER_SZ];
  
-  PROGMEM const char *prefix_string_table[] = {   
+  PGM_P const prefix_string_table[] PROGMEM = {   
     ps_1,
     ps_2,
     ps_3,
@@ -32,7 +32,7 @@ namespace htmlwriter {
     ps_5,
     ps_6,
     ps_7 };
-  PROGMEM const char *suffix_string_table[] = {   
+  PGM_P const suffix_string_table[] PROGMEM = {   
     ss_1,
     ss_2,
     ss_3 };

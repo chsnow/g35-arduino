@@ -5,6 +5,7 @@
 #include "debug.h"
 #include "global.h"
 #include "parsers.h"
+#include "credentials.h"
 #include "wifi_http_server.h"
 #include "htmlwriter.h"
 #include "multitasking.h"
@@ -19,7 +20,7 @@ typedef struct StringInfo_t {
   bool first_bulb_is_zero;  // Normal or reverse addressing.
 } StringInfo;
 
-#define MAX_STRINGS (2)
+#define MAX_STRINGS (4)
 // Information about all strings of bulbs connected to the Arduino.
 typedef struct AllStringInfo_t {
   int n_strings;                 // Number of strings of bulbs.
@@ -29,6 +30,8 @@ typedef struct AllStringInfo_t {
   int n_bulbs;                   // Total number of bulbs. Logical addresses are from 0 to (n_bulbs-1).
 } AllStringInfo;
 AllStringInfo g_string_info;
+
+void SetColorPhysical(int pin, int physical_addr, int intensity, int R, int G, int B);
 
 // Add a string of bulbs to the global config. Logical addresses are assigned sequentially 
 // based on the order strings are added here.
@@ -88,7 +91,7 @@ do {                                 \
 #define WRITE_BITS(pin, bits, nbits)     \
 do {                                     \
   for (int i = nbits - 1; i >= 0; --i) { \
-    if ((bits >> i) & 0x01) {            \ 
+    if ((bits >> i) & 0x01) {            \
       digitalWrite(pin, LOW);            \
       DELAY_US(delay_20us_low);          \
       digitalWrite(pin, HIGH);           \
@@ -222,7 +225,23 @@ void MainLoop() {
           }
           break;
         }
-        case Global::CMD_RACE: {
+        case Global::CMD_TWINKLE: {
+          P("  CMD: Twinkle");
+          int count = 0;
+          while (count < Global::commands[cmd_idx].data.twinkle.max_shifts) {
+            for (int i = 0; i < g_string_info.n_bulbs; ++i) {
+              int cix = 0; //(i + count) % Global::commands[cmd_idx].data.twinkle.n_colors;
+              if (random(0,100) < Global::commands[cmd_idx].data.twinkle.percent) {
+                cix = 1;
+              }
+              int ix = Global::commands[cmd_idx].data.twinkle.colors[cix];
+              SetColor(i, Global::brightness, Global::R[ix], Global::G[ix], Global::B[ix]);
+            }
+           if (PeriodicEvent::Delay(100)) { goto start; }
+           ++count;
+          }
+          break;
+        }case Global::CMD_RACE: {
           P("  CMD: Race");
           int start_idx;
           int end_idx;
@@ -284,10 +303,19 @@ void setup() {
   Serial.begin(9600);
   delay(2000);
 
-  AddAndInitString(/* pin = */ 53, /* n_bulbs = */ 25, /* first_bulb_is_zero = */ true);
+  //AddAndInitString(/* pin = */ 53, /* n_bulbs = */ 25, /* first_bulb_is_zero = */ true);
   // In my setup, the far end of the 50-bulb string is physically closest to the far end 
   // of the 25-bulb string, so use reverse address ordering for the 50-bulb string.
+  
+  // Front of House - Morocco
   AddAndInitString(/* pin = */ 31, /* n_bulbs = */ 50, /* first_bulb_is_zero = */ false);
+  AddAndInitString(/* pin = */ 35, /* n_bulbs = */ 25, /* first_bulb_is_zero = */ true);
+  AddAndInitString(/* pin = */ 39, /* n_bulbs = */ 36, /* first_bulb_is_zero = */ true);
+  AddAndInitString(/* pin = */ 42, /* n_bulbs = */ 36, /* first_bulb_is_zero = */ true);
+
+  // iTwinkle test
+  //AddAndInitString(/* pin = */ 31, /* n_bulbs = */ 36, /* first_bulb_is_zero = */ true);
+
 
   SetAllColor(0xcc, 15, 0, 0);  // POST color.
   
