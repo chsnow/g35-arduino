@@ -10,11 +10,12 @@ typedef enum SelectedProgram_e {
   PROGRAM_THANKSGIVING,
   PROGRAM_CHRISTMAS,
   PROGRAM_VALENTINES,
+  PROGRAM_STPATRICKS,
   PROGRAM_RAINBOW,
   PROGRAM_EASTER,
   PROGRAM_TESTING
 } SelectedProgram;
-SelectedProgram selected_program = PROGRAM_CHRISTMAS;
+SelectedProgram selected_program = PROGRAM_STPATRICKS;
 
 typedef enum CommandType_e {
   CMD_SOLID_COLORS = 1,  // S
@@ -117,6 +118,10 @@ const char program_christmas[] PROGMEM = "C000;CF00;C0F0;CF00;CC82;CFFF;T45,400,
 
 const char program_valentines[] PROGMEM = "C000;CF00;CF25;CFFB;S123;A204;W5000;F33331111222233330000000000000000,150;S123;A204;W10000;S0;F123000;S0;A0,0;S1;A204;W1000;A0;S2;A204;W1000;A0;S3;A204;W1000;A0;S0;A204,0;F123000;S0;A0,0;S123;A204;W1000;A0;S231;A204;W1000;A0;S312;A204;W1000;A0;S123;A204;";
 
+// Rainbow + Green/White/Orange + Green/White
+//                                         0=bl 1=gr 2=wi 3=or 4=re 5=bl 6=ye 7=pu
+const char program_stpatricks[] PROGMEM = "C000;C0F0;CFF9;CF20;CF00;C00F;CFF0;CA0F;S0;F4443336661115557770000000000,150;S123;A204;W5000;F1111222233330000000000000000,150;S123;A204;W10000;S0;F121000;S0;A0,0;S1;A204;W1000;A0;S2;A204;W1000;A0;S0;A204,0;F121000;";
+
 // lightpink, green, yellow, purple, blue, orange
 const char program_easter[] PROGMEM = "C000;CF05;C0F0;CFF0;CA0F;C0CF;CF30;S123456;A204;W10000;F1122334455660000000000000,100;S123456;A204;W10000;F12345600;";
 static const int kMaxProgramBuf = 1024;
@@ -143,6 +148,11 @@ void FetchCurrentProgram() {
     case PROGRAM_VALENTINES: {
         P("  valentines");
         strcpy_P(program_str, program_valentines);
+        break;
+      }
+    case PROGRAM_STPATRICKS: {
+        P("  stpatricks");
+        strcpy_P(program_str, program_stpatricks);
         break;
       }
     case PROGRAM_EASTER: {
