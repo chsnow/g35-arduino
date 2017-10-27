@@ -308,10 +308,10 @@ void setup() {
   // of the 25-bulb string, so use reverse address ordering for the 50-bulb string.
   
   // Front of House - Morocco
-  AddAndInitString(/* pin = */ 31, /* n_bulbs = */ 50, /* first_bulb_is_zero = */ false);
-  AddAndInitString(/* pin = */ 35, /* n_bulbs = */ 25, /* first_bulb_is_zero = */ true);
-  AddAndInitString(/* pin = */ 39, /* n_bulbs = */ 36, /* first_bulb_is_zero = */ true);
-  AddAndInitString(/* pin = */ 42, /* n_bulbs = */ 36, /* first_bulb_is_zero = */ true);
+  AddAndInitString(/* pin = */ 22, /* n_bulbs = */ 50, /* first_bulb_is_zero = */ false);
+  AddAndInitString(/* pin = */ 24, /* n_bulbs = */ 25, /* first_bulb_is_zero = */ true);
+  AddAndInitString(/* pin = */ 26, /* n_bulbs = */ 36, /* first_bulb_is_zero = */ true);
+  AddAndInitString(/* pin = */ 28, /* n_bulbs = */ 36, /* first_bulb_is_zero = */ true);
 
   // iTwinkle test
   //AddAndInitString(/* pin = */ 31, /* n_bulbs = */ 36, /* first_bulb_is_zero = */ true);

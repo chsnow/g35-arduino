@@ -4,15 +4,18 @@
 
 #include "parsers.h"
 
+// Pins:
+// Light strings:  22, 24, 26, 28
+
 namespace Global {
 typedef enum SelectedProgram_e {
-  PROGRAM_HALLOWEEN = 1,
-  PROGRAM_THANKSGIVING,
-  PROGRAM_CHRISTMAS,
-  PROGRAM_VALENTINES,
-  PROGRAM_STPATRICKS,
-  PROGRAM_RAINBOW,
-  PROGRAM_EASTER,
+  PROGRAM_HALLOWEEN = 1,     // 001
+  PROGRAM_THANKSGIVING,      // 010
+  PROGRAM_CHRISTMAS,         // 011
+  PROGRAM_VALENTINES,        // 100
+  PROGRAM_STPATRICKS,        // 101
+  PROGRAM_RAINBOW,           // 110
+  PROGRAM_EASTER,            // 111
   PROGRAM_TESTING
 } SelectedProgram;
 SelectedProgram selected_program = PROGRAM_STPATRICKS;
@@ -127,8 +130,30 @@ const char program_easter[] PROGMEM = "C000;CF05;C0F0;CFF0;CA0F;C0CF;CF30;S12345
 static const int kMaxProgramBuf = 1024;
 char program_str[kMaxProgramBuf] = "";
 
+
+// High:           52, 50, 48
+// Low:            46, 44, 42
+// Settings:       34, 36, 38  (34 = high-order bit)
+void CheckSettings() {
+  pinMode(42, OUTPUT); digitalWrite(42, LOW);
+  pinMode(44, OUTPUT); digitalWrite(44, LOW);
+  pinMode(46, OUTPUT); digitalWrite(46, LOW);
+  pinMode(48, OUTPUT); digitalWrite(48, HIGH);
+  pinMode(50, OUTPUT); digitalWrite(50, HIGH);
+  pinMode(52, OUTPUT); digitalWrite(52, HIGH);
+
+  pinMode(34, INPUT); pinMode(36, INPUT); pinMode (38, INPUT);
+  unsigned int value = 0;
+  if (digitalRead(34) == HIGH) { value += 4; }
+  if (digitalRead(36) == HIGH) { value += 2; }
+  if (digitalRead(38) == HIGH) { value += 1; }
+
+  selected_program = value;
+}
+
 void FetchCurrentProgram() {
   P("Fetching program");
+  CheckSettings();
   switch (selected_program) {
     case PROGRAM_HALLOWEEN: {
         P("  halloween");
